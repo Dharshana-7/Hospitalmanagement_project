@@ -1,0 +1,7 @@
+Admission,name,age,healthissue,priority,admitted_time
+1,patient1,34,fever,Low,"2025-06-23 19:22:51"
+2,patient2,55,"heart pain",High,"2025-06-23 19:23:11"
+3,patient3,19,cold,Low,"2025-06-23 19:23:33"
+4,patient4,25,fever,low,"2025-06-23 19:24:15"
+5,patient5,7,fever,Low,"2025-06-23 19:25:00"
+6,patient6,67,diabetes,Medium,"2025-06-23 19:26:20"
