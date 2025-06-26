@@ -1,18 +1,17 @@
-package Project;
+package model;
 
 public class Patient {			//patient details
 
-		int Admission;
-		String name;
-		int age;
-		String healthissue;
-		String priority;
-		
-		
-
+		public int Admission;			
+		public String name;
+		public int age;
+		public String healthissue;
+		public String priority;
 		
 
-		Patient(int Admission,String name,int age,String healthissue,String priority)			//constructor
+		
+
+		public Patient(int Admission,String name,int age,String healthissue,String priority)			//constructor   
 
 		{
 
@@ -21,7 +20,7 @@ public class Patient {			//patient details
 			this.age=age;
 			this.healthissue=healthissue;
 			this.priority=priority;
-
+			
 			}
 
 

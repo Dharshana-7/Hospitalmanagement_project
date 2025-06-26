@@ -1,4 +1,6 @@
-package Project;
+package dsa;
+
+import model.Patient;
 
 public class patientQueue {
 	Node front;
@@ -18,7 +20,7 @@ public class patientQueue {
 	}
 
 	
-	patientQueue()			//constructor
+	public patientQueue()			//constructor
 	{
 		front=null;
 		rear=null;

@@ -1,6 +1,10 @@
-package Project;
+package Ui;
 
 import java.util.Scanner;
+
+import db.DBmanager;
+import dsa.patientQueue;
+import model.Patient;
 
 public class hospitalsystem {
 	
@@ -9,22 +13,26 @@ public class hospitalsystem {
 		
 		patientQueue queue=new patientQueue();	
 		Scanner s=new Scanner(System.in);
+		
 
-		//DBmanager db;
+		DBmanager db;	//DBmanager reference variable to call the methods in DBmanager class
 
 		try {
-			new DBmanager();					//calls the DBmanager class's constructor to initialize the connection
-		//db=new DBmanager();
+								
+		 db=new DBmanager();			//calls the DBmanager class's constructor to initialize the connection
 
 		while(true)
 		{
-			System.out.println(" Enter the choices");
+			System.out.println("----Welcome to XYZ Hospital----");
+			System.out.println("  Enter the choices  ");
 			System.out.println("1. Create PatientQueue");			//create table
 			System.out.println("2. Admit patient");					//Enqueue patient
 			System.out.println("3. Retrive History");				//Queue data of all patients
-			System.out.println("4. Discharge patient");				//Dequeue patient
-			System.out.println("5. Display Queue");					
-			System.out.println("6. exit");
+			System.out.println("4. Discharge patient");				//Dequeue the served patient
+			System.out.println("5. Searchpatient by Token");		//search patient by patient details
+			System.out.println("6. Deletepatient by TokenName");	//delete patient by name
+			System.out.println("7. Display Queue");					//display from Queue class
+			System.out.println("8. exit");						//disconnects the connection
 			int choice=s.nextInt();
 			s.nextLine();
 
@@ -32,7 +40,7 @@ public class hospitalsystem {
 			switch(choice)
 			{
 			case 1:
-				DBmanager.createtable();
+				db.createtable();
 				break;
 				
 			case 2:
@@ -78,24 +86,25 @@ public class hospitalsystem {
 				String priority=s.nextLine();
 
 				
-				Patient newpatient=new Patient(Admission,name,age,healthissue,priority);
+				Patient newpatient=new Patient(Admission,name,age,healthissue,priority);		
 				queue.enque(newpatient);
-				DBmanager.inserttable(newpatient);						//static method call
-				System.out.println("Patient added to queue and database");
+				db.inserttable(newpatient);						
+				
 				break;
 
+				
 			
-			case 3:
-				DBmanager.retrivetable();
+			case 3:		
+				db.retrivetable();
 				break;
 
 				
 			case 4:
-				Patient removed=queue.deque();
-				if(removed!=null)
+				Patient serve=queue.deque();
+				if(serve!=null)
 				{
-					System.out.println("Dischared :"+removed.name);
-					System.out.println("Patient get severed by the Appropriate Doctor.");
+					db.deletePatient(serve.Admission);
+					System.out.println("Patient get severed by the Appropriate Doctor." + serve.name);
 				}
 				else 
 				{
@@ -103,15 +112,27 @@ public class hospitalsystem {
 				}
 				break;
 
-			
+				
 			case 5:
+				System.out.println("Enter patient (Adnumber,name,age,healthissue,priority): ");
+				String searchtoken=s.nextLine();
+				db.searchpatientbyToken(searchtoken);
+				break;
+				
+			case 6:
+				System.out.print("Enter patient name to delete: ");
+			    String deleteToken = s.nextLine();
+			    db.deleteByToken(deleteToken);
+			    break;
+			
+			case 7:
 				queue.display();
 				break;
 
 			
-			case 6:
-			DBmanager.close();						//static method call
-			break;
+			case 8:
+				db.close();						
+				break;
 				
 			}
 
