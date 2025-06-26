@@ -17,17 +17,6 @@ public class DBmanager {
 	String password="Dharshana07$";
 	static Connection conn;
 	
-	/*static
-	{
-		try
-		{
-			Class.forName("com.mysql.cj.jdbc.Driver");	//Java to register the driver with the JDBC framework so that you can connect to a MySQL database.
-		}
-		catch(Exception e)			//if the driver class is not found, it will throw a ClassNotFoundException.						
-		{							//The catch block prints the error message if any exception occurs.
-			System.out.println(e);
-		}
-	}	*/
 	
 	
 	public DBmanager() throws SQLException, ClassNotFoundException {		//constructor
@@ -39,8 +28,8 @@ public class DBmanager {
 	
 	public void createtable() throws ClassNotFoundException, SQLException
 	{
-		try
-		{
+		try								//if Error occurs for table doesn't exist,the program stops and it will not display the main menu. 				
+		{					//without try catch block the menu will not be displayed and program get stopped.
 		Statement stmt=conn.createStatement();
 		String query="create table patientqueue("+"Admission int," + "name varchar(50)," + "age int," + "healthissue varchar(100)," + "priority varchar(10)," + "admitted_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP" + ")";
 		stmt.execute(query);
@@ -68,9 +57,9 @@ public class DBmanager {
 	public void inserttable(Patient p) throws ClassNotFoundException, SQLException
 	{
 	
-		try
-		{
-		String query="insert into patientqueue(Admission,name,age,healthissue,priority,admitted_time) values(?,?,?,?,?,?)";  //?
+		try					//if Error occurs for table doesn't exist,the program stops and it will not display the main menu. 				
+		{					//without try catch block the menu will not be displayed and program get stopped.
+		String query="insert into patientqueue(Admission,name,age,healthissue,priority,admitted_time) values(?,?,?,?,?,?)";
 		PreparedStatement stmt=conn.prepareStatement(query);
 		stmt.setInt(1, p.Admission);
 		stmt.setString(2, p.name);
@@ -142,8 +131,8 @@ public class DBmanager {
 	
 	
 	public void deletePatient(int Admission) throws Exception {
-		try
-		{
+		try							//if Error occurs for table doesn't exist,the program stops and it will not display the main menu. 				
+		{					//without try catch block the menu will not be displayed and program get stopped.
 	    String query="Delete from patientqueue where Admission= ?";
 	    PreparedStatement stmt = conn.prepareStatement(query);
 	    stmt.setInt(1, Admission);
@@ -170,8 +159,8 @@ public class DBmanager {
 	
 	public void searchpatientbyToken(String token) throws SQLException
 	{
-		try
-		{
+		try								//if Error occurs for table doesn't exist,the program stops and it will not display the main menu. 				
+		{					//without try catch block the menu will not be displayed and program get stopped.
 		String query="select * from patientqueue where Admission like ? or name like ? or age like ? or healthissue like ? or priority like ?";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		String likePattern = "%" + token + "%";
@@ -204,8 +193,8 @@ public class DBmanager {
 	
 	
 	public void deleteByToken(String token) throws SQLException {
-		try
-		{
+		try										//if Error occurs for table doesn't exist,the program stops and it will not display the main menu. 				
+		{					//without try catch block the menu will not be displayed and program get stopped.
 	    String query = "DELETE FROM patientqueue WHERE name = ?";
 	    PreparedStatement stmt = conn.prepareStatement(query);
 	    stmt.setString(1, token);
