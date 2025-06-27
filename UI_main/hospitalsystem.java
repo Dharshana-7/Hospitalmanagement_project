@@ -104,6 +104,8 @@ public class hospitalsystem {
 				if(serve!=null)
 				{
 					db.deletePatient(serve.Admission);
+					System.out.println("Enter the number: ");
+					Admission=s.nextInt();
 					System.out.println("Patient get severed by the Appropriate Doctor." + serve.name);
 				}
 				else 
